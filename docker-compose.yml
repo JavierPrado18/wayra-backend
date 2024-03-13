@@ -1,0 +1,50 @@
+version: '3.4'
+networks:
+  backend:
+services:
+  wayraDb:
+    container_name: wayra-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Soysqlserver18@
+    networks:
+      - backend
+    ports:
+      - 8003:1433
+  festivitiesApi:
+    container_name: festivities-api
+    image: ${DOCKER_REGISTRY-}festivities-api
+    build: 
+      context: .
+      dockerfile: WebApiFestivities/Dockerfile
+    networks:
+      - backend
+    environment:
+      - DB_HOST=wayraDb
+      - DB_NAME=festivities
+      - DB_PASSWORD=Soysqlserver18@
+
+  placesApi:
+    container_name: places-api
+    image: ${DOCKER_REGISTRY-}places-api
+    build: 
+      context: .
+      dockerfile: ApiPlaces/Dockerfile
+    networks:
+      - backend
+    environment:
+      - DB_HOST=wayraDb
+      - DB_NAME=places
+      - DB_PASSWORD=Soysqlserver18@
+
+  apigateway:
+    container_name: api-gateway
+    image: ${DOCKER_REGISTRY-}apigateway
+    build: 
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    networks:
+      - backend
+    ports:
+      - 8004:80

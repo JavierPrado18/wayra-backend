@@ -1,0 +1,59 @@
+{
+    "Routes":[
+        {
+            "UpstreamPathTemplate":"/api/Festividades"   ,
+            "UpstreamHttpMethod":["Get","Post"],
+            "DownstreamScheme":"http",
+            "DownstreamHostAndPorts":[
+                {
+                    "Host":"festivitiesApi",
+                    "Port":80
+                }
+            ],
+            "DownstreamPathTemplate":"/api/Festividades"
+        },
+        {
+            "UpstreamPathTemplate":"/api/Festividades/{id}"   ,
+            "UpstreamHttpMethod":["Get","Put","Delete"],
+            "DownstreamScheme":"http",
+            "DownstreamHostAndPorts":[
+                {
+                    "Host":"festivitiesApi",
+                    "Port":80
+                }
+            ],
+            "DownstreamPathTemplate":"/api/Festividades/{id}"
+        },
+
+        {
+            "UpstreamPathTemplate":"/api/Places"   ,
+            "UpstreamHttpMethod":["Get","Post"],
+            "DownstreamScheme":"http",
+            "DownstreamHostAndPorts":[
+                {
+                    "Host":"placesApi",
+                    "Port":80
+                }
+            ],
+            "DownstreamPathTemplate":"/api/Places"
+        },
+        {
+            "UpstreamPathTemplate":"/api/Places/{id}"   ,
+            "UpstreamHttpMethod":["Get","Put","Delete"],
+            "DownstreamScheme":"http",
+            "DownstreamHostAndPorts":[
+                {
+                    "Host":"placesApi",
+                    "Port":80
+                }
+            ],
+            "DownstreamPathTemplate":"/api/Places/{id}"
+        }
+
+
+
+    ],
+    "GlobalConfigutation":{
+        "BaseUrl":"http://localhost:8004"
+    }
+}
